@@ -95,18 +95,18 @@
 
 
 
-<meta name="description" content="1.实现callcall()方法调用一个函数，其具有一个指定的this值和分别地提供的参数（参数的列表）。也就是说使用call方法，你可以指定被调用函数的this值，并且给他传参数。 123456789101112Function.prototype.newCall = function(context, ...parameter) &amp;#123;  if (typeof context === &apos;">
+<meta name="description" content="1.实现callcall()方法调用一个函数，其具有一个指定的this值和分别地提供的参数（参数的列表）。也就是说使用call方法，你可以指定被调用函数的this值，并且给他传参数。 123456789101112Function.prototype.myCall = function(context, ...parameter) &amp;#123;  if (typeof context === &apos;o">
 <meta name="keywords" content="前端,js,原生js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web前端开发之实现bind,call,apply">
 <meta property="og:url" content="https://90neoculture.github.io/2019/09/02/2019-09-02-apply-call/index.html">
 <meta property="og:site_name" content="90neoculture&#39;s Blog">
-<meta property="og:description" content="1.实现callcall()方法调用一个函数，其具有一个指定的this值和分别地提供的参数（参数的列表）。也就是说使用call方法，你可以指定被调用函数的this值，并且给他传参数。 123456789101112Function.prototype.newCall = function(context, ...parameter) &amp;#123;  if (typeof context === &apos;">
+<meta property="og:description" content="1.实现callcall()方法调用一个函数，其具有一个指定的this值和分别地提供的参数（参数的列表）。也就是说使用call方法，你可以指定被调用函数的this值，并且给他传参数。 123456789101112Function.prototype.myCall = function(context, ...parameter) &amp;#123;  if (typeof context === &apos;o">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-03T06:54:15.646Z">
+<meta property="og:updated_time" content="2020-03-06T03:16:05.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web前端开发之实现bind,call,apply">
-<meta name="twitter:description" content="1.实现callcall()方法调用一个函数，其具有一个指定的this值和分别地提供的参数（参数的列表）。也就是说使用call方法，你可以指定被调用函数的this值，并且给他传参数。 123456789101112Function.prototype.newCall = function(context, ...parameter) &amp;#123;  if (typeof context === &apos;">
+<meta name="twitter:description" content="1.实现callcall()方法调用一个函数，其具有一个指定的this值和分别地提供的参数（参数的列表）。也就是说使用call方法，你可以指定被调用函数的this值，并且给他传参数。 123456789101112Function.prototype.myCall = function(context, ...parameter) &amp;#123;  if (typeof context === &apos;o">
 
 
 
@@ -409,11 +409,11 @@
 
       
         <h3 id="1-实现call"><a href="#1-实现call" class="headerlink" title="1.实现call"></a>1.实现call</h3><p>call()方法调用一个函数，其具有一个指定的this值和分别地提供的参数（参数的列表）。<br>也就是说使用call方法，你可以指定被调用函数的this值，并且给他传参数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.newCall = <span class="function"><span class="keyword">function</span>(<span class="params">context, ...parameter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> context === <span class="string">'object'</span>) &#123;</span><br><span class="line">    context = context || <span class="built_in">window</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    context = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fn = <span class="built_in">Symbol</span>()</span><br><span class="line">  context[fn] = <span class="keyword">this</span></span><br><span class="line">  context[fn](...parameter);</span><br><span class="line">  <span class="keyword">delete</span> context[fn]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myCall = <span class="function"><span class="keyword">function</span>(<span class="params">context, ...parameter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> context === <span class="string">'object'</span>) &#123;</span><br><span class="line">    context = context || <span class="built_in">window</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    context = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fn = <span class="built_in">Symbol</span>()</span><br><span class="line">  context[fn] = <span class="keyword">this</span></span><br><span class="line">  context[fn](...parameter);</span><br><span class="line">  <span class="keyword">delete</span> context[fn]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="2-实现apply"><a href="#2-实现apply" class="headerlink" title="2.实现apply"></a>2.实现apply</h3><p>apply()方法调用一个函数，其具有一个指定的this值，以及作为一个数组（或类数组对象）提供的参数。 注意：call()方法的作用和 apply() 方法类似，只有一个区别，就是 call()方法接受的是若干个参数的列表，而apply()方法接受的是一个包含多个参数的数组。<br>apply和call方法的区别就在于，call是传参数列表，apply是传一个数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.newApply = <span class="function"><span class="keyword">function</span>(<span class="params">context, parameter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> context === <span class="string">'object'</span>) &#123;</span><br><span class="line">    context = context || <span class="built_in">window</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    context = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fn = <span class="built_in">Symbol</span>()</span><br><span class="line">  context[fn] = <span class="keyword">this</span></span><br><span class="line">  context[fn](parameter);</span><br><span class="line">  <span class="keyword">delete</span> context[fn]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-实现bind"><a href="#3-实现bind" class="headerlink" title="3.实现bind"></a>3.实现bind</h3><p>The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.<br>即：bind（）方法创建一个新函数，在调用时，将其this关键字设置为提供的值，并在调用新函数时提供任何前面提供的给定参数序列。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">context,...innerArgs</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> me = <span class="keyword">this</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...finnalyArgs</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> me.call(context,...innerArgs,...finnalyArgs)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myApply = <span class="function"><span class="keyword">function</span>(<span class="params">context, parameter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> context === <span class="string">'object'</span>) &#123;</span><br><span class="line">    context = context || <span class="built_in">window</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    context = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fn = <span class="built_in">Symbol</span>()</span><br><span class="line">  context[fn] = <span class="keyword">this</span></span><br><span class="line">  context[fn](parameter);</span><br><span class="line">  <span class="keyword">delete</span> context[fn]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-实现bind"><a href="#3-实现bind" class="headerlink" title="3.实现bind"></a>3.实现bind</h3><p>bind（）方法创建一个新函数，在调用时，将其this关键字设置为提供的值，并在调用新函数时提供任何前面提供的给定参数序列。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span> (<span class="params">context,...innerArgs</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> me = <span class="keyword">this</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...finnalyArgs</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> me.call(context,...innerArgs,...finnalyArgs)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -460,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/17/2019-08-17-picture/" rel="next" title="web前端开发之图片篇">
-                <i class="fa fa-chevron-left"></i> web前端开发之图片篇
+              <a href="/2019/08/17/2019-08-17-picture/" rel="next" title="前端性能优化之图片篇">
+                <i class="fa fa-chevron-left"></i> 前端性能优化之图片篇
               </a>
             
           </div>
@@ -572,7 +572,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -583,7 +583,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -594,7 +594,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

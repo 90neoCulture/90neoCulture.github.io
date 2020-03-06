@@ -1,12 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>web前端开发之Promise</title>
+    <title>手写一个vue组件</title>
+    <url>/2020/03/01/2020-03-01-vue-components/</url>
+    <content><![CDATA[<h3 id="1-故事的开始"><a href="#1-故事的开始" class="headerlink" title="1.故事的开始"></a>1.故事的开始</h3><pre><code>公司的运营后台管理系统有很多弹窗查询，查询结果显示在表格的页面，因此想抽出一个组件。
+</code></pre>]]></content>
+      <categories>
+        <category>前端</category>
+        <category>vue</category>
+        <category>es6</category>
+        <category>模块化</category>
+        <category>组件化</category>
+        <category>element-ui</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>js</tag>
+        <tag>es6</tag>
+        <tag>vue</tag>
+        <tag>模块化</tag>
+        <tag>组件化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vuex使用及原理</title>
+    <url>/2020/02/06/2020-02-06-vue-vuex/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端</category>
+        <category>vue</category>
+        <category>es6</category>
+        <category>模块化</category>
+        <category>组件化</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>js</tag>
+        <tag>es6</tag>
+        <tag>vue</tag>
+        <tag>模块化</tag>
+        <tag>组件化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手把手教你使用全局vue组件</title>
+    <url>/2020/01/12/2020-01-12-vue-global-components/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端</category>
+        <category>vue</category>
+        <category>es6</category>
+        <category>模块化</category>
+        <category>组件化</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>js</tag>
+        <tag>es6</tag>
+        <tag>vue</tag>
+        <tag>模块化</tag>
+        <tag>组件化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js代码优雅写法笔记</title>
+    <url>/2019/10/06/2019-10-06-js%E4%BB%A3%E7%A0%81%E4%BC%98%E9%9B%85%E5%86%99%E6%B3%95%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端</category>
+        <category>vue</category>
+        <category>es6</category>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>js</tag>
+        <tag>es6</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手写简易版Promise</title>
     <url>/2019/09/22/2019-09-22-promise/</url>
-    <content><![CDATA[<p>Promise是JS异步编程中的重要概念，异步抽象处理对象，是目前比较流行Javascript异步编程解决方案之一.<br>promise的含义和用法可以点击链接查看：<a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/promise</a></p>
-<h3 id="1-了解Promises-A-规范"><a href="#1-了解Promises-A-规范" class="headerlink" title="1.了解Promises/A+ 规范"></a>1.了解Promises/A+ 规范</h3><p>promise/A+规范，点击链接查看：<a href="https://promisesaplus.com/" target="_blank" rel="noopener">https://promisesaplus.com/</a></p>
+    <content><![CDATA[<h3 id="1-解决异步问题"><a href="#1-解决异步问题" class="headerlink" title="1.解决异步问题"></a>1.解决异步问题</h3><p>我们解决异步问题主要有以下几种方案：</p>
+<ul>
+<li>回调函数</li>
+<li>事件监听</li>
+<li>发布/订阅</li>
+<li>Promise对象</li>
+</ul>
+<p>以回调函数举例，我们这样以jQuery的ajax获取数据：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.<span class="keyword">get</span>(url, (data) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>如果需要发送多个异步请求，则会层层嵌套：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.<span class="keyword">get</span>(url, data =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data)</span><br><span class="line">    $.<span class="keyword">get</span>(data.url, data2 =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(data2)</span><br><span class="line">        $.<span class="keyword">get</span>(data2.url, data3 =&gt; &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(data3)</span><br><span class="line">            $.<span class="keyword">get</span>(data3.url, data4 =&gt; &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(data4)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这种编码模式我们可以发现主要有一下几个问题：</p>
+<ul>
+<li>1.执行顺序与代码书写顺序并不一致，不利于阅读</li>
+<li>2.上述回调函数基本都是匿名函数，不方便捕捉bug。</li>
+<li>3.异步操作的顺序改变时，需要大规模的修改代码结构。</li>
+<li>4.层层嵌套，形成回调地狱</li>
+</ul>
+<p>所以想要解决这些问题，给大家介绍ES6的Promise对象。</p>
+<p>promise使用<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 异步处理</span></span><br><span class="line">    <span class="comment">// 处理结束后、调用resolve 或 reject</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Promise是JS异步编程中的重要概念，异步抽象处理对象，是目前比较流行Javascript异步编程解决方案之一。</li>
+<li>promise的含义和用法可以点击链接查看：<a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/promise</a></li>
+</ul>
+<p>现在我们来了解Promises/A+ 规范</p>
+<h3 id="2-了解Promises-A-规范"><a href="#2-了解Promises-A-规范" class="headerlink" title="2.了解Promises/A+ 规范"></a>2.了解Promises/A+ 规范</h3><p>promise/A+规范，点击链接查看：<a href="https://promisesaplus.com/" target="_blank" rel="noopener">https://promisesaplus.com/</a></p>
 <p>通过规范我们了解到，要实现promise，首先要定义promise的状态，包括：等待状态（Pending） 执行状态（Fulfilled） 和 拒绝状态（Rejected）。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> PENDING = <span class="string">'pending'</span>;</span><br><span class="line"><span class="keyword">const</span> FULFILLED = <span class="string">'fulfilled'</span>;</span><br><span class="line"><span class="keyword">const</span> REJECTED = <span class="string">'rejected'</span>;</span><br></pre></td></tr></table></figure>
 <p>1.1 promise状态</p>
 <ul>
 <li><p>当promise处于请求状态（pending）时：<br>  promise可以转为fulfilled或rejected状态</p>
@@ -30,11 +130,14 @@
 </li>
 <li><p>then可以在同一个promise里被多次调用<br>  如果 promise 完成执行（fulfilled）,各个相应的onFulfilled回调必须根据最原始的then 顺序来调用<br>  如果 promise 被拒绝（rejected）,各个相应的onRejected回调必须根据最原始的then 顺序来调用</p>
 </li>
-<li><p>then必须返回一个promise<br>  如果onFulfilled或onRejected返回一个值x, 运行Promise Resolution Procedure  <a href="promise2, x">[Resolve]</a> 2.3<br>  如果onFulfilled或onRejected抛出一个异常e,promise2必须被拒绝（rejected）并把e当作原因<br>  如果onFulfilled不是一个方法，并且promise1已经完成（fulfilled）,promise2必须使用与promise1相同的值来完成（fulfiled）<br>  如果onRejected不是一个方法，并且promise1已经被拒绝（rejected）,promise2必须使用与promise1相同的原因来拒绝（rejected）</p>
+<li><p>then必须返回一个promise<br>  如果onFulfilled或onRejected返回一个值x, 运行Promise Resolution Procedure  <a href="promise2, x">[Resolve]</a><br>  如果onFulfilled或onRejected抛出一个异常e,promise2必须被拒绝（rejected）并把e当作原因<br>  如果onFulfilled不是一个方法，并且promise1已经完成（fulfilled）,promise2必须使用与promise1相同的值来完成（fulfiled）<br>  如果onRejected不是一个方法，并且promise1已经被拒绝（rejected）,promise2必须使用与promise1相同的原因来拒绝（rejected）</p>
+  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">promise2 = promise1.then(onFulfilled, onRejected);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="2-简易版promise实现"><a href="#2-简易版promise实现" class="headerlink" title="2.简易版promise实现"></a>2.简易版promise实现</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="3-Promises-A-规范-完整代码"><a href="#3-Promises-A-规范-完整代码" class="headerlink" title="3.Promises/A+ 规范 完整代码"></a>3.Promises/A+ 规范 完整代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="3-简易版promise实现"><a href="#3-简易版promise实现" class="headerlink" title="3.简易版promise实现"></a>3.简易版promise实现</h3><p>根据上述要求，我们可以实现一个简易版的promise</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 表示promise的三种状态，便于后期维护</span></span><br><span class="line"><span class="keyword">const</span> PENDING = <span class="string">'pending'</span></span><br><span class="line"><span class="keyword">const</span> RESOLVED = <span class="string">'resolved'</span></span><br><span class="line"><span class="keyword">const</span> REJECTED = <span class="string">'rejected'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyPromise</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 将this对象赋值给 _that,便于后面调用</span></span><br><span class="line">    <span class="keyword">const</span> _that = <span class="keyword">this</span></span><br><span class="line">    <span class="comment">// 初始状态为PENDING</span></span><br><span class="line">    _that.state = PENDING</span><br><span class="line">    <span class="comment">// value用于保存resolve 或者 reject 中传入的值</span></span><br><span class="line">    _that.value = <span class="literal">null</span></span><br><span class="line">    <span class="comment">// 用于保存then中的回调，把then中的回调保存起来在用户状态改变时使用</span></span><br><span class="line">    _that.resolvedCallbacks = []</span><br><span class="line">    _that.rejectedCallbacks = []</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 因为只有等待状态可以改变状态，首先两个函数都要先判断当前状态是否是等待中</span></span><br><span class="line">    <span class="comment">// 将当前状态更改为对应的状态，并且将传入的值赋值给value，遍历回调数组并执行</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(_that.state === PENDING) &#123;</span><br><span class="line">            _that.state = RESOLVED</span><br><span class="line">            _that.value = value</span><br><span class="line">            _that.resolvedCallbacks.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(_that.value))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(_that.state === PENDING) &#123;</span><br><span class="line">            _that.state = REJECTED</span><br><span class="line">            _that.value = value</span><br><span class="line">            _that.rejectedCallbacks.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(_that.value))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 执行传入的参数并且将之前的两个函数当做参数传进去，并捕获错误并执行reject函数</span></span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        fn(resolve, reject)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        reject(e)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MyPromise.prototype.then = <span class="function"><span class="keyword">function</span>(<span class="params">onFulfilled, onResolved</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> _that = <span class="keyword">this</span></span><br><span class="line">    <span class="comment">// 首先判断两个参数是否为函数类型，因为这两个参数时可选参数</span></span><br><span class="line">    <span class="comment">// 当参数不是函数类型时，需要创建一个函数赋值给对应的参数</span></span><br><span class="line">    onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">'function'</span> ? onFulfilled : <span class="function"><span class="params">v</span> =&gt;</span> v</span><br><span class="line">    onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">'function'</span> ? onRejected : <span class="function"><span class="params">r</span> =&gt;</span> &#123; <span class="keyword">throw</span> r &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断状态</span></span><br><span class="line">    <span class="comment">// 如果状态是等待态的话，就往回调函数中push函数</span></span><br><span class="line">    <span class="comment">// 如果状态不是等待态，就去执行相应的函数</span></span><br><span class="line">    <span class="keyword">if</span>(_that.state === PENDING) &#123;</span><br><span class="line">        _that.resolvedCallbacks.push(onFulfilled)</span><br><span class="line">        _that.rejectedCallbacks.push(onRejected)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(_that.state === RESOLVED) &#123;</span><br><span class="line">        onFulfilled(_that.value)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(_that.state === REJECTED) &#123;</span><br><span class="line">        onRejected(_that.value)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试案例：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="string">'resolved'</span>)</span><br><span class="line">    &#125;, <span class="number">0</span>)</span><br><span class="line"> &#125;).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data)</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>参考文档：<br>Promises/A+规范-英文 [ <a href="https://promisesaplus.com/" target="_blank" rel="noopener">https://promisesaplus.com/</a> ]<br>Promises/A+规范-翻译 [ <a href="https://segmentfault.com/a/1190000002452115/" target="_blank" rel="noopener">https://segmentfault.com/a/1190000002452115/</a> ]</p>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -73,11 +176,11 @@
     <title>web前端开发之实现bind,call,apply</title>
     <url>/2019/09/02/2019-09-02-apply-call/</url>
     <content><![CDATA[<h3 id="1-实现call"><a href="#1-实现call" class="headerlink" title="1.实现call"></a>1.实现call</h3><p>call()方法调用一个函数，其具有一个指定的this值和分别地提供的参数（参数的列表）。<br>也就是说使用call方法，你可以指定被调用函数的this值，并且给他传参数。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.newCall = <span class="function"><span class="keyword">function</span>(<span class="params">context, ...parameter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> context === <span class="string">'object'</span>) &#123;</span><br><span class="line">    context = context || <span class="built_in">window</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    context = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fn = <span class="built_in">Symbol</span>()</span><br><span class="line">  context[fn] = <span class="keyword">this</span></span><br><span class="line">  context[fn](...parameter);</span><br><span class="line">  <span class="keyword">delete</span> context[fn]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myCall = <span class="function"><span class="keyword">function</span>(<span class="params">context, ...parameter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> context === <span class="string">'object'</span>) &#123;</span><br><span class="line">    context = context || <span class="built_in">window</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    context = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fn = <span class="built_in">Symbol</span>()</span><br><span class="line">  context[fn] = <span class="keyword">this</span></span><br><span class="line">  context[fn](...parameter);</span><br><span class="line">  <span class="keyword">delete</span> context[fn]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="2-实现apply"><a href="#2-实现apply" class="headerlink" title="2.实现apply"></a>2.实现apply</h3><p>apply()方法调用一个函数，其具有一个指定的this值，以及作为一个数组（或类数组对象）提供的参数。 注意：call()方法的作用和 apply() 方法类似，只有一个区别，就是 call()方法接受的是若干个参数的列表，而apply()方法接受的是一个包含多个参数的数组。<br>apply和call方法的区别就在于，call是传参数列表，apply是传一个数组。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.newApply = <span class="function"><span class="keyword">function</span>(<span class="params">context, parameter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> context === <span class="string">'object'</span>) &#123;</span><br><span class="line">    context = context || <span class="built_in">window</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    context = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fn = <span class="built_in">Symbol</span>()</span><br><span class="line">  context[fn] = <span class="keyword">this</span></span><br><span class="line">  context[fn](parameter);</span><br><span class="line">  <span class="keyword">delete</span> context[fn]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-实现bind"><a href="#3-实现bind" class="headerlink" title="3.实现bind"></a>3.实现bind</h3><p>The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.<br>即：bind（）方法创建一个新函数，在调用时，将其this关键字设置为提供的值，并在调用新函数时提供任何前面提供的给定参数序列。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">context,...innerArgs</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> me = <span class="keyword">this</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...finnalyArgs</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> me.call(context,...innerArgs,...finnalyArgs)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myApply = <span class="function"><span class="keyword">function</span>(<span class="params">context, parameter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> context === <span class="string">'object'</span>) &#123;</span><br><span class="line">    context = context || <span class="built_in">window</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    context = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fn = <span class="built_in">Symbol</span>()</span><br><span class="line">  context[fn] = <span class="keyword">this</span></span><br><span class="line">  context[fn](parameter);</span><br><span class="line">  <span class="keyword">delete</span> context[fn]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-实现bind"><a href="#3-实现bind" class="headerlink" title="3.实现bind"></a>3.实现bind</h3><p>bind（）方法创建一个新函数，在调用时，将其this关键字设置为提供的值，并在调用新函数时提供任何前面提供的给定参数序列。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.myBind = <span class="function"><span class="keyword">function</span> (<span class="params">context,...innerArgs</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> me = <span class="keyword">this</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...finnalyArgs</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> me.call(context,...innerArgs,...finnalyArgs)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -90,7 +193,7 @@
       </tags>
   </entry>
   <entry>
-    <title>web前端开发之图片篇</title>
+    <title>前端性能优化之图片篇</title>
     <url>/2019/08/17/2019-08-17-picture/</url>
     <content><![CDATA[<h3 id="1-PNG8-PNG24-PNG32的区别"><a href="#1-PNG8-PNG24-PNG32的区别" class="headerlink" title="1.PNG8/PNG24/PNG32的区别"></a>1.PNG8/PNG24/PNG32的区别</h3><ul>
 <li>PNG8: 256=2^8色，支持透明</li>
