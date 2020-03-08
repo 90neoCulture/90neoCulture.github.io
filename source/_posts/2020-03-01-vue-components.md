@@ -22,7 +22,6 @@ tags:
 ---
 
 ### 1.故事的开始
-    公司的运营后台管理系统有很多弹窗查询，查询结果显示在表格的页面，因此想抽出一个组件。
-    
+公司的运营后台管理系统有很多弹窗查询，查询结果显示在表格的页面，因此想抽出一个组件。
 
-  
+![avatar](https://github.com/90neoCulture/90neoculture.github.io/blob/master/source/_posts/2020-blog-pic/type1.png)
