@@ -48,6 +48,118 @@ tags:
     ![avatar][ideas]
 具体实现代码指路：[ https://github.com/90neoculture/my-linklinkup ]
 
+#### 1.实现二维随机数组
+Utils.js文件：
+```javascript
+// 从数组中随机选取几条不重复的数据
+Utils.arrayRandom = (arr, count) => {
+  if (arr.length <= count) {
+    Utils.arrayShuffle(arr)
+    return arr
+  }
+  let set = new Set()
+  return Array(count).fill(0).map(e => arrayRandomItem(arr, set))
+}
+// 数组随机排序
+Utils.arrayShuffle = (arr) => {
+  for (var j, x, i = arr.length; i; j = ~~(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
+  return arr
+}
+// 从数组中随机选一条数据，set可用于去重
+const arrayRandomItem = (arr, set) => {
+  let arrlen = arr.length
+  let rand = ~~(Math.random() * arr.length)
+  return set.has(rand) ? arrayRandomItem(arr, set) : (set.add(rand), arr[rand])
+}
+// 使用fill，填充数组
+Utils.dyadicArrayWrap = (arr, fill) => {
+  let firstRowLength = 0
+  let lastRowLength = 0
+  arr.forEach((row, index) => {
+    if (index === 0) {
+      firstRowLength = row.length + 2
+    } else if (index === arr.length - 1) {
+      lastRowLength = row.length + 2
+    }
+    row.splice(0, 0, Object.assign({}, fill).valueOf())
+    row.splice(row.length, 0, Object.assign({}, fill).valueOf())
+  })
+  arr.splice(0, 0, Array(firstRowLength).fill(0).map(e => Object.assign({}, fill).valueOf()))
+  arr.splice(arr.length, 0, Array(lastRowLength).fill(0).map(e => Object.assign({}, fill).valueOf()))
+  return arr
+}
+// 随机填充一个指定大小的数组，并且每组数据是groupCount的倍数
+Utils.arrayFillByRandomGroup = (fillCount, group, groupCount = 2) => {
+  let groupLength = group.length
+  let perGroup = ~~(~~(fillCount / groupLength) / groupCount) * groupCount
+  let rest = fillCount - perGroup * groupLength
+  let countArray = group.map((e, i) => rest / groupCount > i ? perGroup + groupCount : perGroup)
+  let result = countArray.reduce((prev, curr, index) => prev.concat(Array(curr).fill(0).map(e => Object.assign({}, group[index]).valueOf())), [])
+  Utils.arrayShuffle(result)
+  return result
+}
+
+// 将一维数组根据col转换为二维数组
+Utils.arrayToDyadic = function (arr, col) {
+  let result = []
+  arr.forEach((e, i) => {
+    let index = ~~(i / col)
+    let mod = i % col
+    result[index] || (result[index] = [])
+    result[index][mod] = e
+  })
+  return result
+}
+
+export default Utils
+```
+
+idex.vue文件中编写 initData() 方法，用于初始化数组：
+```javascript
+initData() {
+    // classNames => ['a','b','c','d'] 每个元素代表一个方块的className
+    // 生成一个方块的数组，将className放到其中
+    let cellGroup = this.currentTheme.classNames.map(e => {
+        return {
+            isBlank: false, // 是否空白方块
+            className: e, // 方块的className
+            lineClass: '', // 连接线的className
+            isLine: false, // 是否显示连接线
+            isSelected: false
+        }
+    })
+
+    // 空白方块
+    let blankCell = {
+        isBlank: true,
+        className: '',
+        lineClass: '',
+        isLine: false,
+        isSelected: false
+    }
+
+    // 先根据配置中的方块个数从方块数组中随机取出几条
+    let randomCellGroup = Utils.arrayRandom(cellGroup, this.config.cellGroupCount)
+
+    // 再根据配置中的行和列随机填充一个地图数据
+    let cellData = Utils.arrayFillByRandomGroup(this.config.row * this.config.col, randomCellGroup)
+
+    // 将数据根据行的大小转为二维数组，然后外部包裹一层空白节点
+    let result = Utils.dyadicArrayWrap(Utils.arrayToDyadic(cellData, this.config.col), blankCell)
+
+    // 最后把行和列的坐标设置到节点上
+    result.forEach((cols, row) => {
+        cols.forEach((cell, col) => {
+            cell.row = row
+            cell.col = col
+        })
+    })
+    return result
+}
+```
+
+#### 2.实现点击消除
+
 
 
 
